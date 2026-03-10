@@ -1,0 +1,55 @@
+.collection-item-card {
+  position: relative;
+  background: #f0f6ff;
+  border: 1px solid #8ca3c7;
+  border-radius: 12px;
+  padding: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  max-width: 16rem;
+}
+
+.collection-item-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.rarity-ship {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: #4a6cf7;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+img {
+  height: auto;
+  height: 10rem;
+  margin-bottom: 0.75rem;
+}
+
+.item-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding-top: 2rem;
+}
+
+.item-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 0.5rem;
+}
+
+.item-price{
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #1fa852;
+}

@@ -1,9 +1,11 @@
 import { Component, signal } from '@angular/core';
+import { CollectionItemCard } from './components/collection-item-card/collection-item-card';
 
 @Component({
   selector: 'app-root',
   templateUrl : './app.html',
-  styleUrl : './app.css'
+  styleUrl : './app.css',
+  imports: [CollectionItemCard],
 
 })
 export class App {
