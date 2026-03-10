@@ -1,21 +1,21 @@
 <article class="collection-item-card">
-  <span class="rarity-ship">Legendary</span>
+  <span class="rarity-ship">{{item().rarity}}</span>
 
   <figure class="item-image">
-    <img src="img/linx.png" alt="Linx pokemon">
+    <img [src]="item().image" alt="Linx pokemon">
   </figure>
 
   <header class="item-header">
     <h2 class="item-name">
-      Linx
+      {{item().name}}
     </h2>
   </header>
 
   <p class="item-description">
-    A legendary sword of unmatched sharpness and history.
+    {{item().description}}
   </p>
 
   <footer>
-    <p class="item-price">$199</p>
+    <p class="item-price">{{item().price}}$</p>
   </footer>
 </article>
