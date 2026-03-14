@@ -1,4 +1,4 @@
-import { Component, input, output, OutputEmitterRef } from '@angular/core';
+import { Component, model, output, OutputEmitterRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -9,8 +9,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class SearchBar {
 
-  search = input("Initial");
-  searchChange = output<string>();
+  search = model("Initial");
 
   searchButtonClicked: OutputEmitterRef<void> = output<void>({});
   searchClicked(){
@@ -18,6 +17,6 @@ export class SearchBar {
   }
 
   updateSearch(searchText: string){
-    this.searchChange.emit(searchText);
+    this.search.set(searchText);
   }
 }
