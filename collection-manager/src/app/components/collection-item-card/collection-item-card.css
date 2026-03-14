@@ -7,6 +7,7 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
   max-width: 16rem;
+  margin-bottom: 0.4rem;
 }
 
 .collection-item-card:hover {

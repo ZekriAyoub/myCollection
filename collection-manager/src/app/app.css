@@ -23,3 +23,12 @@ h1 {
   text-align: center;
   margin-top: 1rem;
 }
+
+hr.gold{
+  border-color: goldenrod;
+}
+
+
+hr.grey{
+  border-style: dashed;
+}
