@@ -14,6 +14,7 @@ export class App {
   coin! : CollectionItem;
   linx! : CollectionItem;
   count = 0;
+  searchText = "";
 
   constructor() {
     this.coin = new CollectionItem();
@@ -26,7 +27,7 @@ export class App {
     this.linx = new CollectionItem();
   }
 
-    incrementCount() {
+  incrementCount() {
     this.count++;
   }
 
