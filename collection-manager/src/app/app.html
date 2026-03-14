@@ -2,16 +2,16 @@
   <h1>My Collection</h1>
   <div>
     <app-search-bar
-      (searchButtonClicked)="incrementCount()"
       [(search)]="searchText"
     >
     </app-search-bar>
-    Clicked count : {{count}}
-    <br>
-    Search Text : {{searchText}}
   </div>
 </header>
 <section class="collection-grid">
-  <app-collection-item-card [item]="selectedItem()"></app-collection-item-card>
+  @for(item of collectionItems(); track item.name){
+    <app-collection-item-card
+      [item]="item"
+    >
+    </app-collection-item-card>
+  }
 </section>
-<button (click)="incrementIndex()">Toggle</button>

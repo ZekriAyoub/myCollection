@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, effect, signal } from '@a
 import { CollectionItemCard } from './components/collection-item-card/collection-item-card';
 import { CollectionItem } from './models/collection-items';
 import { SearchBar } from "./components/search-bar/search-bar";
+import { Collection } from './models/collection';
 
 @Component({
   selector: 'app-root',
@@ -13,16 +14,12 @@ import { SearchBar } from "./components/search-bar/search-bar";
 export class App {
   coin! : CollectionItem;
   linx! : CollectionItem;
-  count = 0;
+  stamp! : CollectionItem;
+
   searchText = "";
 
- itemList: CollectionItem[] = [];
- selectedItemIndex = signal(0);
- selectedItem = computed(()=> this.itemList[this.selectedItemIndex()]);
-
- loggeffect = effect(() => {
-  console.log("Selected item changed: ", this.selectedItem(), "selected item index: ", this.selectedItemIndex());
- });
+  selectedCollection = signal<Collection | null>(null);
+  collectionItems = computed(() => this.selectedCollection()?.items || []);
 
   constructor() {
     this.coin = new CollectionItem();
@@ -34,17 +31,18 @@ export class App {
 
     this.linx = new CollectionItem();
 
-    this.itemList = [this.coin, this.linx];
-  }
+    this.stamp = new CollectionItem();
+    this.stamp.name = "Vieux Timbre";
+    this.stamp.description = "Un vieux timbre de 1920.";
+    this.stamp.rarity = "Rare";
+    this.stamp.price = 555;
+    this.stamp.image = "img/timbre1.png";
 
-  incrementCount() {
-    this.count++;
-  }
+    const defaultCollection = new Collection();
+    defaultCollection.title = "Default Collection";
+    defaultCollection.items = [this.coin, this.linx, this.stamp];
 
-  incrementIndex() {
-    this.selectedItemIndex.update((currentValue) => {
-      return (currentValue + 1) % this.itemList.length;
-    });
+    this.selectedCollection.set(defaultCollection);
   }
 
 }
