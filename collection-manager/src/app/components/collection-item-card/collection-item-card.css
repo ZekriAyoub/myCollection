@@ -53,3 +53,9 @@ img {
   font-weight: 500;
   color: #1fa852;
 }
+
+.item-description {
+  font-size: 0.875rem;
+  color: #555;
+  margin-bottom: 0.75rem;
+}
