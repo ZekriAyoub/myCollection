@@ -37,8 +37,9 @@ export class App {
   }
 
   incrementIndex() {
-    const currentValue = this.selectedItemIndex();
-    this.selectedItemIndex.set((currentValue + 1) % this.itemList.length);
+    this.selectedItemIndex.update((currentValue) => {
+      return (currentValue + 1) % this.itemList.length;
+    });
   }
 
 }
