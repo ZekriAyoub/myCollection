@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, effect, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, model, signal } from '@angular/core';
 import { CollectionItemCard } from './components/collection-item-card/collection-item-card';
 import { CollectionItem } from './models/collection-items';
 import { SearchBar } from "./components/search-bar/search-bar";
@@ -16,10 +16,15 @@ export class App {
   linx! : CollectionItem;
   stamp! : CollectionItem;
 
-  searchText = "";
+  searchText = model("");
 
   selectedCollection = signal<Collection | null>(null);
-  collectionItems = computed(() => this.selectedCollection()?.items || []);
+  collectionItems = computed(() => {
+    const allItems = this.selectedCollection()?.items || [];
+    return allItems?.filter(
+      item => item.name.toLowerCase().includes(this.searchText().toLowerCase())
+    );
+  });
 
   constructor() {
     this.coin = new CollectionItem();
