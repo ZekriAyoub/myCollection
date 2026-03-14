@@ -8,11 +8,5 @@ import { CollectionItem } from '../../models/collection-items';
   styleUrl: './collection-item-card.css',
 })
 export class CollectionItemCard {
-  item: InputSignal<CollectionItem> = input.required<CollectionItem, CollectionItem>({
-    alias: "collection-item",
-    transform: (collectionItem) => {
-      collectionItem.price = collectionItem.price * 1.17;
-      return collectionItem;
-    }
-  });
+  item: InputSignal<CollectionItem> = input.required<CollectionItem>();
 }
