@@ -13,6 +13,7 @@ import { SearchBar } from "./components/search-bar/search-bar";
 export class App {
   coin! : CollectionItem;
   linx! : CollectionItem;
+  count = 0;
 
   constructor() {
     this.coin = new CollectionItem();
@@ -24,4 +25,9 @@ export class App {
 
     this.linx = new CollectionItem();
   }
+
+    incrementCount() {
+    this.count++;
+  }
+
 }

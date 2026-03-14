@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output, OutputEmitterRef } from '@angular/core';
 
 @Component({
   selector: 'app-search-bar',
@@ -6,4 +6,9 @@ import { Component } from '@angular/core';
   templateUrl: './search-bar.html',
   styleUrl: './search-bar.css',
 })
-export class SearchBar {}
+export class SearchBar {
+  searchButtonClicked: OutputEmitterRef<void> = output<void>();
+  searchClicked(){
+    this.searchButtonClicked.emit();
+  }
+}
