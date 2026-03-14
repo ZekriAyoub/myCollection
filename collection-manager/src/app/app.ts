@@ -16,6 +16,9 @@ export class App {
   count = 0;
   searchText = "";
 
+ itemList: CollectionItem[] = [];
+ selectedItemIndex = signal(0);
+
   constructor() {
     this.coin = new CollectionItem();
     this.coin.name = "Piece de 1980";
@@ -25,10 +28,17 @@ export class App {
     this.coin.image = "img/coin1.png";
 
     this.linx = new CollectionItem();
+
+    this.itemList = [this.coin, this.linx];
   }
 
   incrementCount() {
     this.count++;
+  }
+
+  incrementIndex() {
+    const currentValue = this.selectedItemIndex();
+    this.selectedItemIndex.set((currentValue + 1) % this.itemList.length);
   }
 
 }
