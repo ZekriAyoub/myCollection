@@ -1,12 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { CollectionItemCard } from './components/collection-item-card/collection-item-card';
 import { CollectionItem } from './models/collection-items';
+import { SearchBar } from "./components/search-bar/search-bar";
 
 @Component({
   selector: 'app-root',
   templateUrl : './app.html',
   styleUrl : './app.css',
-  imports: [CollectionItemCard],
+  imports: [CollectionItemCard, SearchBar],
 
 })
 export class App {

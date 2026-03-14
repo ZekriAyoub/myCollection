@@ -1,0 +1,36 @@
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 5px 10px;
+  width: 300px;
+}
+
+.search-box img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+button {
+  background: #4a6cf7;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background: #3a5ed7;
+}
+
+#live-search {
+  border: none;
+  outline: none;
+  width: 100%;
+}
