@@ -8,12 +8,15 @@
   </div>
 </header>
 <section class="collection-grid">
-  @for(item of collectionItems(); track item.name){
+  @for (item of collectionItems(); track item.name){
     <app-collection-item-card
       [item]="item"
     >
     </app-collection-item-card>
-  }@empty {
-    <div>No results found</div>
   }
 </section>
+@if (collectionItems().length){
+  <div class="centered">Found <b>{{collectionItems().length}}</b> results</div>
+}@else {
+  <div class="centered">No items found</div>
+}
