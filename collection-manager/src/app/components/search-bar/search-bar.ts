@@ -15,8 +15,5 @@ export class SearchBar {
   searchClicked(){
     this.searchButtonClicked.emit();
   }
-
-  updateSearch(searchText: string){
-    this.search.set(searchText);
-  }
+  
 }
