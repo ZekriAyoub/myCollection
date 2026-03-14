@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, signal } from '@angular/core';
 import { CollectionItemCard } from './components/collection-item-card/collection-item-card';
 import { CollectionItem } from './models/collection-items';
 import { SearchBar } from "./components/search-bar/search-bar";
@@ -8,7 +8,7 @@ import { SearchBar } from "./components/search-bar/search-bar";
   templateUrl : './app.html',
   styleUrl : './app.css',
   imports: [CollectionItemCard, SearchBar],
-
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class App {
   coin! : CollectionItem;
@@ -18,6 +18,11 @@ export class App {
 
  itemList: CollectionItem[] = [];
  selectedItemIndex = signal(0);
+ selectedItem = computed(()=> this.itemList[this.selectedItemIndex()]);
+
+ loggeffect = effect(() => {
+  console.log("Selected item changed: ", this.selectedItem(), "selected item index: ", this.selectedItemIndex());
+ });
 
   constructor() {
     this.coin = new CollectionItem();
