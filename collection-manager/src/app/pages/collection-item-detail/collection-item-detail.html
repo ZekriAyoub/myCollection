@@ -1,7 +1,10 @@
-@let selectedItemId = itemId();
-@if (selectedItemId){
-  <p>Item ID: {{ selectedItemId }}!</p>
-  <button [routerLink]="['/item', selectedItemId + 1]">Next</button>
-}@else{
-  <p>New item !</p>
-}
+<form (submit)="submit($event)">
+  <div class="form-field">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" [formControl]="nameFormControl">
+    @if (nameFormControl.invalid && (nameFormControl.touched || nameFormControl.dirty)){
+      <div class="error">This field is required.</div>
+    }
+  </div>
+  <button type="submit" [disabled]="nameFormControl.invalid">Submit</button><br>
+</form>

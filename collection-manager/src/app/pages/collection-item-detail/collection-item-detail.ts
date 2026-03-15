@@ -1,18 +1,20 @@
 import { Component, inject, input} from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-collection-item-detail',
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule, ReactiveFormsModule],
   templateUrl: './collection-item-detail.html',
   styleUrl: './collection-item-detail.css',
 })
 export class CollectionItemDetail {
 
-  private readonly router = inject(Router);
+  nameFormControl = new FormControl('', Validators.required);
 
-  itemId = input<number | null, string | null>(null, {
-    alias: 'id',
-    transform: value => value ? parseInt(value) : null
-  });
+  submit(event : Event){
+    event.preventDefault();
+    console.log(this.nameFormControl.value);
+  }
+
 }
