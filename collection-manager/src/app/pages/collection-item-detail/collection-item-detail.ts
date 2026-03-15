@@ -1,9 +1,9 @@
 import { Component, inject, input} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-collection-item-detail',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './collection-item-detail.html',
   styleUrl: './collection-item-detail.css',
 })
@@ -16,14 +16,4 @@ export class CollectionItemDetail {
     alias: 'id',
     transform: value => value ? parseInt(value) : null
   });
-
-  next() {
-    const currentId = this.itemId();
-    if(currentId){
-      const nextId = currentId + 1;
-      this.router.navigate(['item', nextId])
-    }
-  }
-
-
 }
