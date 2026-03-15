@@ -1,5 +1,5 @@
 import { Component, inject, input} from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-collection-item-detail',
@@ -9,7 +9,6 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 })
 export class CollectionItemDetail {
 
-  private readonly activedRoute = inject(ActivatedRoute);
   private readonly router = inject(Router);
 
   itemId = input<number | null, string | null>(null, {
