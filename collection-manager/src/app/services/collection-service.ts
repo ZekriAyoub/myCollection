@@ -12,7 +12,33 @@ export class CollectionService {
   private currentItemIndex : {[key: number]: number} = {};
 
   constructor(){
-    this.generateDummyData();
+    this.load();
+  }
+
+  private save() {
+    localStorage.setItem('collections', JSON.stringify(this.collections));
+  }
+
+  private load(){
+    const collectionsJson= localStorage.getItem('collections');
+    if (collectionsJson) {
+      this.collections = JSON.parse(collectionsJson).map((collectionJson: any) => {
+        const collection = Object.assign(new Collection(), collectionJson);
+        const itemsJson = collectionJson.items || [];
+        collection.items = itemsJson.map((item: any) => Object.assign(new CollectionItem(), item));
+        return collection;
+      });
+      this.currentId = Math.max(...this.collections.map(c => c.id), 0) + 1;
+      this.currentItemIndex = this.collections.reduce(
+        (indexes: {[key: number]: number}, collection) => {
+          indexes[collection.id] = Math.max(...collection.items.map(i => i.id), 0) + 1;
+          return indexes;
+        }, {}
+      );
+    } else {
+      this.generateDummyData();
+      this.save();
+    }
   }
 
   generateDummyData() {
@@ -42,7 +68,7 @@ export class CollectionService {
   }
 
   getAll(): Collection[] {
-    // coopy because we don't want to return the reference of the collection, otherwise it can be modified outside of the service
+    // copy because we don't want to return the reference of the collection, otherwise it can be modified outside of the service
     return this.collections.map(collection => collection.copy());
   }
 
@@ -60,6 +86,8 @@ export class CollectionService {
 
     this.currentItemIndex[storedCopy.id] = 1;
     this.currentId++;
+    this.save();
+
     return storedCopy.copy();
   }
 
@@ -71,6 +99,7 @@ export class CollectionService {
     if (!storedCopy) return null;
 
     Object.assign(storedCopy, collection);
+    this.save();
     return storedCopy.copy();
   }
 
@@ -78,6 +107,7 @@ export class CollectionService {
     this.collections = this.collections.filter(
       collection => collection.id !== collectionId
     );
+    this.save();
   }
 
   addItem(collection: Collection, item: CollectionItem): Collection | null {
@@ -92,6 +122,7 @@ export class CollectionService {
     storedCollection.items.push(storedItem);
 
     this.currentItemIndex[storedCollection.id]++;
+    this.save();
 
     return storedCollection.copy();
   }
@@ -110,6 +141,7 @@ export class CollectionService {
     if (storedItemIndex === -1) return null;
 
     storedCollection.items[storedItemIndex] = item.copy();
+    this.save();
     return storedCollection.copy();
   }
 
@@ -123,7 +155,7 @@ export class CollectionService {
     storedCollection.items = storedCollection.items.filter(
       storedItem => storedItem.id !== itemId
     );
-
+    this.save();
     return storedCollection.copy();
   }
 
