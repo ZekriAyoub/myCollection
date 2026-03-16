@@ -26,7 +26,7 @@ export class CollectionDetail {
   collectionItems = computed(() => {
     const allItems = this.selectedCollection()?.items || [];
     return allItems?.filter(
-      item => item.name?.toLowerCase().includes(this.searchText().toLowerCase())
+      item => (item.name || "").toLowerCase().includes((this.searchText() || "").toLowerCase())
     );
   });
 
