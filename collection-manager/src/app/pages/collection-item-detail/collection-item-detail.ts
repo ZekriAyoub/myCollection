@@ -10,11 +10,13 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class CollectionItemDetail {
 
-  nameFormControl = new FormControl('', Validators.required);
+  nameFormControl = new FormControl('', [Validators.required]);
+  priceFormControl = new FormControl(0, [Validators.min(0), Validators.required]);
 
   submit(event : Event){
     event.preventDefault();
     console.log(this.nameFormControl.value);
+    console.log(this.priceFormControl.value);
   }
 
 }
