@@ -1,24 +1,64 @@
-import { Component, inject, input} from '@angular/core';
+import { Component, effect, inject, input, OnDestroy, signal} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Rarities } from '../../models/collection-items';
+import { CollectionItem, Rarities } from '../../models/collection-items';
+import { CollectionItemCard } from '../../components/collection-item-card/collection-item-card';
+import { Router } from '@angular/router';
+import { CollectionService } from '../../services/collection-service';
+import { Collection } from '../../models/collection';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-collection-item-detail',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, CollectionItemCard],
   templateUrl: './collection-item-detail.html',
   styleUrl: './collection-item-detail.css',
 })
-export class CollectionItemDetail {
+export class CollectionItemDetail implements OnDestroy {
 
   private formBuilder = inject(FormBuilder);
+  private router = inject(Router);
+  private collectionService = inject(CollectionService);
 
   readonly rarities = Object.values(Rarities);
+
+  selectedCollection! : Collection;
+  collectionItem = signal<CollectionItem>(new CollectionItem());
+
+  valueChangeSubscription: Subscription | null = null;
+
+  itemId = input<number | null, string| null>(null, {
+    alias: 'id',
+    transform: ((id: string|null)=> id ? parseInt(id) : null)
+  });
+
+  constructor() {
+    effect(
+      () => {
+        let itemToDisplay = new CollectionItem();
+        this.selectedCollection = this.collectionService.getAll()[0];
+        if (this.itemId()) {
+          const itemFound = this.selectedCollection.items.find(item => item.id === this.itemId());
+          if (itemFound){
+            itemToDisplay = itemFound;
+          }else {
+            this.router.navigate(['not-found']);
+          }
+          this.itemFormGroup.patchValue(itemToDisplay);
+        }
+      }
+    );
+    this.valueChangeSubscription = this.itemFormGroup.valueChanges.subscribe(
+      (_) => {
+        this.collectionItem.set(Object.assign(new CollectionItem(), this.itemFormGroup.value))
+      }
+    )
+  }
 
   itemFormGroup = this.formBuilder.group({
     name: ['', [Validators.required]],
     description: ['', Validators.required],
     image: ['', Validators.required],
-    rarity: [Rarities.Common, [Validators.required]],
+    rarity: ['', [Validators.required]],
     price: [0, [Validators.min(0), Validators.required]]
   })
 
@@ -46,4 +86,7 @@ export class CollectionItemDetail {
     }
   }
 
+  ngOnDestroy(): void {
+    this.valueChangeSubscription?.unsubscribe();
+  }
 }
