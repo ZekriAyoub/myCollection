@@ -5,6 +5,7 @@ import { CollectionItem } from '../../models/collection-items';
 import { Collection } from '../../models/collection';
 import { SearchBar } from "../../components/search-bar/search-bar";
 import { CollectionItemCard } from "../../components/collection-item-card/collection-item-card";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,6 +17,7 @@ import { CollectionItemCard } from "../../components/collection-item-card/collec
 export class CollectionDetail {
 
   private collectionService = inject(CollectionService);
+  private readonly router = inject(Router);
   coin! : CollectionItem;
   linx! : CollectionItem;
   stamp! : CollectionItem;
@@ -38,12 +40,13 @@ export class CollectionDetail {
   }
 
   addGenericItem() {
-    const collection = this.selectedCollection();
+    /*const collection = this.selectedCollection();
     if (collection){
       const storedCollection = this.collectionService.addItem(
         collection, new CollectionItem()
       )
       this.selectedCollection.set(storedCollection);
-    }
+    }*/
+    this.router.navigate(['item'])
   }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, InputSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, input, InputSignal, Output } from '@angular/core';
 import { CollectionItem } from '../../models/collection-items';
 
 @Component({
@@ -11,4 +11,5 @@ import { CollectionItem } from '../../models/collection-items';
 })
 export class CollectionItemCard {
   item: InputSignal<CollectionItem> = input.required<CollectionItem>();
+  @Output() onselect = new EventEmitter<void>();
 }

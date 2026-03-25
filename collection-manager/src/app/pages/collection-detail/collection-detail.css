@@ -32,13 +32,3 @@ hr.gold{
 hr.grey{
   border-style: dashed;
 }
-
-button {
-  background: #4a6cf7;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}

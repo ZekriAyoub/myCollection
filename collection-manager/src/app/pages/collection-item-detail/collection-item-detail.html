@@ -1,4 +1,4 @@
-<app-collection-item-card [item]="collectionItem()" />
+<app-collection-item-card (onselect)="goToDetails()"  [item]="collectionItem()" />
 
 <form [formGroup]="itemFormGroup" (submit)="submit($event)">
   <div class="form-field">
@@ -43,6 +43,10 @@
     }
   </div>
   <button type="submit" [disabled]="itemFormGroup.invalid">Save</button>
+  <button (click)="redirectToHome()">Cancel</button>
+  @if(isExistingItem()){
+    <button (click)="DeleteItem()">Delete</button>
+  }
 </form>
 
 

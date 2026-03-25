@@ -8,20 +8,18 @@
   </div>
 </header>
 <section class="collection-grid">
-  @for (item of collectionItems(); track item.name){
+  @for (item of collectionItems(); track item.id){
     @switch(item.rarity){
       @case("Legendary"){
         <div>
           <app-collection-item-card [item]="item">
           </app-collection-item-card>
-          <hr class="gold">
         </div>
       }
       @case("Rare"){
         <div>
           <app-collection-item-card [item]="item">
           </app-collection-item-card>
-          <hr class="grey">
         </div>
       }
       @default {
@@ -38,5 +36,5 @@
   <div class="centered">No items found</div>
 }
 <div class="centered">
-  <button (click)="addGenericItem()">Add Generic Item</button>
+  <button (click)="addGenericItem()">Ajouter Objet</button>
 </div>

@@ -89,4 +89,25 @@ export class CollectionItemDetail implements OnDestroy {
   ngOnDestroy(): void {
     this.valueChangeSubscription?.unsubscribe();
   }
+
+  redirectToHome(){
+    this.router.navigate(['home']);
+  }
+
+  DeleteItem(){
+    console.log(this.itemId())
+    const itemId = this.itemId();
+    if(itemId){
+      this.collectionService.deleteItem(this.selectedCollection.id,itemId);
+      this.router.navigate(['home'])
+    }
+  }
+
+  isExistingItem(){
+    return this.itemId() != null;
+  }
+
+  goToDetails(){
+    this.router.navigate(['home'])
+  }
 }
